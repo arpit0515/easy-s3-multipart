@@ -18,7 +18,7 @@ A production-ready Python library for handling large file uploads to AWS S3 usin
 ## Installation
 
 ```bash
-pip install fastapi-s3-multipart
+pip install easy-s3-multipart
 ```
 
 ## Quick Start
