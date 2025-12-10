@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "easy-s3-multipart"
+version = "0.1.0"
+description = "A simple Python library to simplify multipart uploads to AWS S3 with presigned URLs."
+authors = [
+    { name = "Arpit Thukral", email = "arpit.thukral@gmail.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+
+# Core dependencies
+dependencies = [
+    "boto3>=1.34",
+    "botocore>=1.34",
+]
+
+# Optional extra groups (e.g. for development/testing)
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-mock",
+    "moto[s3]",
+    "black",
+    "ruff",
+]
+
+[tool.setuptools]
+package-dir = {"" = "easy_s3_multipart"}
+
+[tool.setuptools.packages.find]
+where = ["easy_s3_multipart"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -4,14 +4,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="fastapi-s3-multipart",
+    name="easy-s3-multipart",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Arpit",
+    author_email="arpit.thukral@gmail.com",
     description="Production-ready S3 multipart upload handler for FastAPI",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/fastapi-s3-multipart",
+    url="https://github.com/arpit0515/easy-s3-multipart",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
