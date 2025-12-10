@@ -19,7 +19,7 @@ Notes:
 ================================================================================
 """
 
-from fastapi_s3_multipart.models import (
+from easy_s3_multipart.models import (
     InitiateUploadResponse,
     PresignedUrlResponse,
     CompleteUploadResponse,

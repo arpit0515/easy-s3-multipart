@@ -18,7 +18,7 @@ Notes:
 
 import boto3
 from botocore.exceptions import ClientError, BotoCoreError
-from datetime import datetime
+import datetime
 from typing import Dict, List, Optional
 import logging
 
@@ -42,7 +42,7 @@ logger = logging.getLogger(__name__)
 
 class S3MultipartHandler:
     """Handler for S3 multipart uploads with presigned URLs
-    
+
     This class provides methods for:
     - Initiating multipart uploads
     - Generating presigned URLs for part uploads
@@ -51,7 +51,7 @@ class S3MultipartHandler:
     - Generating download URLs
     - Deleting files
     - Aborting incomplete uploads
-    
+
     Example:
         handler = S3MultipartHandler(
             bucket_name="my-bucket",
@@ -59,14 +59,14 @@ class S3MultipartHandler:
             aws_secret_access_key="...",
             region="us-east-1"
         )
-        
+
         # Initiate upload
         result = handler.initiate_upload(
             filename="large-file.pdf",
             file_size=104857600,
             content_type="application/pdf"
         )
-        
+
         # Generate presigned URL for part 1
         url = handler.generate_presigned_url(
             upload_id=result.upload_id,
@@ -84,7 +84,7 @@ class S3MultipartHandler:
         config: Optional[S3Config] = None,
     ):
         """Initialize S3 handler
-        
+
         Args:
             bucket_name: S3 bucket name
             aws_access_key_id: AWS access key ID
@@ -113,11 +113,11 @@ class S3MultipartHandler:
 
     def _validate_file(self, filename: str, file_size: int) -> None:
         """Validate file before upload
-        
+
         Args:
             filename: Name of the file
             file_size: Size of the file in bytes
-            
+
         Raises:
             S3ValidationError: If validation fails
         """
@@ -135,15 +135,15 @@ class S3MultipartHandler:
 
     def _generate_s3_key(self, filename: str, prefix: str = "uploads") -> str:
         """Generate S3 key with date-based organization
-        
+
         Args:
             filename: Name of the file
             prefix: Prefix for the key (default: uploads)
-            
+
         Returns:
             Generated S3 key
         """
-        timestamp = datetime.utcnow()
+        timestamp = datetime.datetime.now(datetime.timezone.utc)
         return f"{prefix}/{timestamp.strftime('%Y/%m/%d')}/{timestamp.strftime('%H%M%S')}_{filename}"
 
     def initiate_upload(
@@ -155,17 +155,17 @@ class S3MultipartHandler:
         custom_key: Optional[str] = None,
     ) -> InitiateUploadResponse:
         """Initiate a multipart upload
-        
+
         Args:
             filename: Name of the file to upload
             file_size: Total size of the file in bytes
             content_type: MIME type of the file
             metadata: Optional custom metadata
             custom_key: Optional custom S3 key (overrides auto-generated key)
-            
+
         Returns:
             InitiateUploadResponse with upload details
-            
+
         Raises:
             S3ValidationError: If file validation fails
             S3InitiationError: If upload initiation fails
@@ -184,7 +184,9 @@ class S3MultipartHandler:
             )
 
             upload_id = response["UploadId"]
-            parts_count = (file_size + self.config.part_size - 1) // self.config.part_size
+            parts_count = (
+                file_size + self.config.part_size - 1
+            ) // self.config.part_size
 
             logger.info(
                 f"Initiated upload: {upload_id} for {filename} ({parts_count} parts)"
@@ -206,15 +208,15 @@ class S3MultipartHandler:
         self, upload_id: str, key: str, part_number: int
     ) -> PresignedUrlResponse:
         """Generate presigned URL for uploading a part
-        
+
         Args:
             upload_id: Upload ID from initiation
             key: S3 object key
             part_number: Part number (1-indexed)
-            
+
         Returns:
             PresignedUrlResponse with the URL
-            
+
         Raises:
             S3UploadError: If URL generation fails
         """
@@ -247,15 +249,15 @@ class S3MultipartHandler:
         self, upload_id: str, key: str, parts: List[Dict[str, any]]
     ) -> CompleteUploadResponse:
         """Complete a multipart upload
-        
+
         Args:
             upload_id: Upload ID from initiation
             key: S3 object key
             parts: List of parts with PartNumber and ETag
-            
+
         Returns:
             CompleteUploadResponse with upload details
-            
+
         Raises:
             S3UploadError: If completion fails
         """
@@ -288,11 +290,11 @@ class S3MultipartHandler:
 
     def abort_upload(self, upload_id: str, key: str) -> None:
         """Abort a multipart upload
-        
+
         Args:
             upload_id: Upload ID to abort
             key: S3 object key
-            
+
         Raises:
             S3UploadError: If abort fails
         """
@@ -310,15 +312,15 @@ class S3MultipartHandler:
         self, prefix: str = "uploads/", page: int = 1, page_size: int = 20
     ) -> ListFilesResponse:
         """List files from S3 with pagination
-        
+
         Args:
             prefix: S3 prefix to filter files
             page: Page number (1-indexed)
             page_size: Number of items per page
-            
+
         Returns:
             ListFilesResponse with paginated files
-            
+
         Raises:
             S3UploadError: If listing fails
         """
@@ -367,14 +369,14 @@ class S3MultipartHandler:
 
     def generate_download_url(self, key: str, expires_in: int = 3600) -> str:
         """Generate presigned download URL
-        
+
         Args:
             key: S3 object key
             expires_in: URL expiry time in seconds (default: 3600)
-            
+
         Returns:
             Presigned download URL
-            
+
         Raises:
             S3UploadError: If URL generation fails
         """
@@ -392,10 +394,10 @@ class S3MultipartHandler:
 
     def delete_file(self, key: str) -> None:
         """Delete a file from S3
-        
+
         Args:
             key: S3 object key to delete
-            
+
         Raises:
             S3DeleteError: If deletion fails
         """
@@ -409,23 +411,25 @@ class S3MultipartHandler:
 
     def cleanup_incomplete_uploads(self, days_old: int = 7) -> int:
         """Clean up incomplete multipart uploads older than specified days
-        
+
         Args:
             days_old: Delete uploads older than this many days
-            
+
         Returns:
             Number of uploads cleaned up
-            
+
         Raises:
             S3UploadError: If cleanup fails
         """
         try:
             response = self.s3_client.list_multipart_uploads(Bucket=self.bucket_name)
-            
+
             if "Uploads" not in response:
                 return 0
 
-            cutoff_date = datetime.utcnow() - timedelta(days=days_old)
+            cutoff_date = datetime.datetime.now(
+                datetime.timezone.utc
+            ) - datetime.timedelta(days=days_old)
             cleaned = 0
 
             for upload in response["Uploads"]:
@@ -439,4 +443,3 @@ class S3MultipartHandler:
         except (ClientError, BotoCoreError) as e:
             logger.error(f"Failed to cleanup incomplete uploads: {e}")
             raise S3UploadError(f"Failed to cleanup incomplete uploads: {e}")
-

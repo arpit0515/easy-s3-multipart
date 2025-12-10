@@ -22,7 +22,7 @@ from typing import Optional
 
 class S3Config(BaseModel):
     """S3 configuration settings
-    
+
     Attributes:
         bucket_name: S3 bucket name
         aws_access_key_id: AWS access key ID
@@ -33,6 +33,7 @@ class S3Config(BaseModel):
         max_file_size: Maximum allowed file size in bytes (default: 5GB)
         allowed_extensions: List of allowed file extensions (None = all allowed)
     """
+
     bucket_name: str
     aws_access_key_id: str
     aws_secret_access_key: str

@@ -16,7 +16,7 @@ Notes:
 ================================================================================
 """
 
-from fastapi_s3_multipart.exceptions import (
+from easy_s3_multipart.exceptions import (
     S3InitiationError,
     S3UploadError,
     S3ValidationError,
