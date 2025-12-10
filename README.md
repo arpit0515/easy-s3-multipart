@@ -1,7 +1,7 @@
-# FastAPI S3 Multipart Upload Handler
+# FastAPI S3 Multipart Upload Handler [![PyPI](https://img.shields.io/pypi/v/easy-s3-multipart.svg)](https://pypi.org/project/easy-s3-multipart/)
 
 A production-ready Python library for handling large file uploads to AWS S3 using multipart uploads with presigned URLs in FastAPI applications. 
-[Easy S3 Multipart on PyPI](https://pypi.org/project/easy-s3-multipart/)
+
 
 ## Features
 
