@@ -25,7 +25,7 @@ pip install easy-s3-multipart
 
 ```python
 from fastapi import FastAPI
-from fastapi_s3_multipart import S3MultipartHandler
+from easy_s3_multipart import S3MultipartHandler
 
 app = FastAPI()
 
@@ -125,7 +125,7 @@ cleaned = s3_handler.cleanup_incomplete_uploads(days_old=7)
 ## Advanced Configuration
 
 ```python
-from fastapi_s3_multipart import S3MultipartHandler, S3Config
+from easy_s3_multipart import S3MultipartHandler, S3Config
 
 config = S3Config(
     bucket_name="my-bucket",
@@ -150,7 +150,7 @@ handler = S3MultipartHandler(
 ## Error Handling
 
 ```python
-from fastapi_s3_multipart.exceptions import (
+from easy_s3_multipart.exceptions import (
     S3ValidationError,
     S3InitiationError,
     S3UploadError
