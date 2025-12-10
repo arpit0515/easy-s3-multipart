@@ -1,3 +1,19 @@
+"""
+================================================================================
+Package:        easy_s3_multipart
+Module:         test_handler.py
+Description:    Testing the core functionality
+
+Author:         Arpit
+Version:        0.1.0
+Git Repo:       https://github.com/arpit0515/easy-s3-multipart
+Created On:     12/10/2025 (MM/DD/YYYY)
+Last Updated:   12/10/2025 (MM/DD/YYYY)
+
+Notes:
+    - Testing the real handler class of getting the job done.
+================================================================================
+"""
 
 import pytest
 from moto import mock_aws

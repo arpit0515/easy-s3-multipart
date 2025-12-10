@@ -1,3 +1,20 @@
+"""
+================================================================================
+Package:        easy_s3_multipart
+Module:         models.py
+Description:    Pydantic Models
+
+Author:         Arpit
+Version:        0.1.0
+Git Repo:       https://github.com/arpit0515/easy-s3-multipart
+Created On:     12/10/2025 (MM/DD/YYYY)
+Last Updated:   12/10/2025 (MM/DD/YYYY)
+
+Notes:
+    - The pydantic models for schema validation
+================================================================================
+
+"""
 from pydantic import BaseModel, Field, validator
 from typing import Optional, Dict, List
 from datetime import datetime

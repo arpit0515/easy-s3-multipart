@@ -1,9 +1,22 @@
 """
-Tests for simple data models.
-These tests only verify:
-- attributes exist
-- attributes types behave as expected
-- model init does not crash
+================================================================================
+Package:        easy_s3_multipart
+Module:         test_models.py
+Description:    Testing the models
+
+Author:         Arpit
+Version:        0.1.0
+Git Repo:       https://github.com/arpit0515/easy-s3-multipart
+Created On:     12/10/2025 (MM/DD/YYYY)
+Last Updated:   12/10/2025 (MM/DD/YYYY)
+
+Notes:
+    - Tests for simple data models.
+    - These tests only verify:
+    - attributes exist
+    - attributes types behave as expected
+    - model init does not crash
+================================================================================
 """
 
 from fastapi_s3_multipart.models import (

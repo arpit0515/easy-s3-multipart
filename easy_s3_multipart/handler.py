@@ -1,3 +1,21 @@
+"""
+================================================================================
+Package:        easy_s3_multipart
+Module:         __init__.py
+Description:    Core of the package, handles the core class
+
+Author:         Arpit
+Version:        0.1.0
+Git Repo:       https://github.com/arpit0515/easy-s3-multipart
+Created On:     12/10/2025 (MM/DD/YYYY)
+Last Updated:   12/10/2025 (MM/DD/YYYY)
+
+Notes:
+    - This is what will be used to get the job done. The class is here.
+================================================================================
+
+"""
+
 import boto3
 from botocore.exceptions import ClientError, BotoCoreError
 from datetime import datetime

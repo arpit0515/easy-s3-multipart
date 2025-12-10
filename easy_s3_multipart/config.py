@@ -1,3 +1,21 @@
+"""
+================================================================================
+Package:        easy_s3_multipart
+Module:         config.py
+Description:    Setting up the configuration
+
+Author:         Arpit
+Version:        0.1.0
+Git Repo:       https://github.com/arpit0515/easy-s3-multipart
+Created On:     12/10/2025 (MM/DD/YYYY)
+Last Updated:   12/10/2025 (MM/DD/YYYY)
+
+Notes:
+    - Sets the configuration for the class params.
+================================================================================
+
+"""
+
 from pydantic import BaseModel, Field
 from typing import Optional
 

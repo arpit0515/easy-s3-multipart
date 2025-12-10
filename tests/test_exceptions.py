@@ -1,6 +1,19 @@
 """
-Very simple tests — verifying that custom exceptions
-can be instantiated and are subclasses of Exception.
+================================================================================
+Package:        easy_s3_multipart
+Module:         test_exceptions.py
+Description:    Testing the exceptions
+
+Author:         Arpit
+Version:        0.1.0
+Git Repo:       https://github.com/arpit0515/easy-s3-multipart
+Created On:     12/10/2025 (MM/DD/YYYY)
+Last Updated:   12/10/2025 (MM/DD/YYYY)
+
+Notes:
+    - Very simple tests — verifying that custom exceptions
+    - Can be instantiated and are subclasses of Exception.
+================================================================================
 """
 
 from fastapi_s3_multipart.exceptions import (

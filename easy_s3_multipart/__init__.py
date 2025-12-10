@@ -1,4 +1,20 @@
-"""FastAPI S3 Multipart Upload Handler
+"""
+================================================================================
+Package:        easy_s3_multipart
+Module:         __init__.py
+Description:    Sets up the package
+
+Author:         Arpit
+Version:        0.1.0
+Git Repo:       https://github.com/arpit0515/easy-s3-multipart
+Created On:     12/10/2025 (MM/DD/YYYY)
+Last Updated:   12/10/2025 (MM/DD/YYYY)
+
+Notes:
+    - Helps everyone understand what this package is for.
+================================================================================
+
+FastAPI S3 Multipart Upload Handler
 
 A production-ready library for handling large file uploads to AWS S3 using 
 multipart upload with presigned URLs in FastAPI applications.
